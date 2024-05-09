@@ -1,7 +1,8 @@
 {
-    "files.associations": {
-        "random": "cpp",
-        "limits": "cpp",
-        "algorithm": "cpp"
-    }
+  "files.associations": {
+    "random": "cpp",
+    "limits": "cpp",
+    "algorithm": "cpp"
+  },
+  "C_Cpp_Runner.msvcBatchPath": ""
 }
