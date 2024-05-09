@@ -9,7 +9,6 @@ private:
     Type *elems;
     int count;
 public:
-    SqList();
     SqList(int size);
     ~SqList();
     int Length() const;
