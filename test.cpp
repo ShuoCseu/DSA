@@ -1,27 +1,33 @@
-#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
 
-template <class T>
-class Sum {
-private:
-    T a;
-    T b;
-public:
-    Sum(T n1, T n2) : a(n1), b(n2) {} // 构造函数定义在类外部，并使用成员初始化列表
-    T sum(); // sum函数返回T类型的结果
-};
-
-template <class T>
-T Sum<T>::sum() { // 成员函数定义在类外部时，不需要再次指定模板参数类型
-    return a + b;
+// 线程函数
+void* thread_func(void* arg) {
+    int thread_num = *((int*)arg);
+    printf("I am thread %d\n", thread_num);
+    return NULL;
 }
 
 int main() {
-    // 使用Sum类的示例
-    Sum<int> intSum(5, 3); // 创建一个Sum对象，模板参数为int
-    std::cout << "Integer Sum: " << intSum.sum() << std::endl;
+    pthread_t threads[3];
+    int thread_nums[3] = {1, 2, 3};
 
-    Sum<double> doubleSum(3.5, 2.7); // 创建一个Sum对象，模板参数为double
-    std::cout << "Double Sum: " << doubleSum.sum() << std::endl;
+    // 创建线程
+    for (int i = 0; i < 3; i++) {
+        if (pthread_create(&threads[i], NULL, thread_func, &thread_nums[i]) != 0) {
+            fprintf(stderr, "Error creating thread %d\n", i);
+            return 1;
+        }
+    }
+
+    // 等待线程完成
+    for (int i = 0; i < 3; i++) {
+        if (pthread_join(threads[i], NULL) != 0) {
+            fprintf(stderr, "Error joining thread %d\n", i);
+            return 2;
+        }
+    }
 
     return 0;
 }
