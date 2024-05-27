@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/myproject.dir/src/main.cpp.o CMakeFiles/myproject.dir/src/SqList.cpp.o -o myproject 
